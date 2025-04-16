@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #eef2f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .name-row {
+      display: flex;
+      gap: 10px;
+    }
+    .name-row input {
+      flex: 1;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+  <div class="container">
+    <h1>St. Xavier's College</h1>
+    <form id="studentForm">
+          <div class="form-group">
+      <label for="group_Sel">Select Course Group</label>
+      <select id="group_Sel" onchange="updateCourses()" required>
+        <option value=""> -[SELECT GROUP]- </option>
+        <option value="UG - Arts">UG - Arts</option>
+        <option value="UG - Business Administration">UG - Business Administration</option>
+        <option value="UG - Commerce">UG - Commerce</option>
+        <option value="UG - Computer Science">UG - Computer Science</option>
+        <option value="UG - Science">UG - Science</option>
+        <option value="PG Arts">PG Arts</option>
+        <option value="PG Science">PG Science</option>
+      </select>
+    </div>
+
+    <!-- Course -->
+    <div class="form-group">
+      <label for="course_Sel">Select Course</label>
+      <select id="course_Sel" required>
+        <option value=""> -[SELECT COURSE]- </option>
+      </select>
+    </div>
+
+      <!-- Student Name -->
+      <div class="form-group">
+        <label>Student Name (As per SSC)</label>
+        <div class="name-row">
+          <input type="text" id="surname" placeholder="Surname" required>
+          <input type="text" id="name" placeholder="Name" required>
+          <input type="text" id="fathername" placeholder="Father Name" required>
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="form-group">
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" placeholder="Enter 10 digit mobile number"
+               pattern="[0-9]{10}" required title="Enter exactly 10 digits">
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="Enter your E-Mail" required>
+      </div>
+
+      <!-- DOB -->
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" required>
+      </div>
+<div class="form-group">
+  
+  
+  
+  
+  
+  <input type="checkbox" id="verifyHuman" required>
+  <label for="verifyHuman">I am not a robot</label>
+  
+  
+  <div class="g-recaptcha" data-sitekey="6LfBRxorAAAAAOD7U25rO3XHFzRzJiYIoL6ork5I"></div>
+</div>
+      
+      
+      
+      
+      
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  
+  
+  
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
+  
+  
+  
+  <script>
+    const courseOptions = {
+      "UG - Arts": [
+        "BA Hons (Aided) - Economics (Guj & Eng), English, Gujarati, Psychology (Guj & Eng), Sanskrit",
+        "BA Hons (SF) - Economics",
+        "BA Hons (SF) - English",
+        "BA Hons (SF) - Psychology",
+        "BA Hons (SF) - Sociology and Development",
+        "BPA Hons (SF) - Theater and Production Management"
+      ],
+      "UG - Business Administration": [
+        "BS BBA Hons (SF) - Bachelor of Business Administration - NEW 2025-2026"
+      ],
+      "UG - Commerce": [
+        "BCom Hons (SF) - Business Process Services",
+        "BCom Hons (SF) - General"
+      ],
+      "UG - Computer Science": [
+        "BCA Hons (SF) - Bachelor Of Computer Applications"
+      ],
+      "UG - Science": [
+        "BSc Hons (Aided) - Biochemistry, Botany, Chemistry, Electronics, Mathematics, Physics, Statistics, Zoology",
+        "BS IT Hons (SF) - Information Technology - NEW 2025-2026",
+        "BSc Hons (SF) - Artificial Intelligence - NEW 2025-2026",
+        "BSc Hons (SF) - Biotechnology"
+      ],
+      "PG Arts": [
+        "MA (SF) - Clinical Psychology",
+        "MA (SF) - English"
+      ],
+      "PG Science": [
+        "MSc (Aided) - Organic Chemistry",
+        "MSc (SF) - Analytical Chemistry",
+        "MSc (SF) - Artificial Intelligence (AI)",
+        "MSc (SF) - Big Data Analytics (BDA)",
+        "MSc (SF) - Biochemistry",
+        "MSc (SF) - Biotechnology",
+        "MSc (SF) - Botany",
+        "MSc (SF) - Mathematics",
+        "MSc (SF) - Microbiology",
+        "MSc (SF) - Physics"
+      ]
+    };
+
+    function updateCourses() {
+      const group = document.getElementById("group_Sel").value;
+      const courseSel = document.getElementById("course_Sel");
+
+      courseSel.innerHTML = "<option value=''> -[SELECT COURSE]- </option>";
+
+      if (group && courseOptions[group]) {
+        courseOptions[group].forEach((course, index) => {
+          const option = document.createElement("option");
+          option.value = index;
+          option.text = course;
+          courseSel.add(option);
+        });
+      }
+    }
+  </script>
+  
+  
+  
+  <script>
+    document.getElementById("studentForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      
+      
+      var recaptchaResponse = grecaptcha.getResponse();
+if (recaptchaResponse.length === 0) {
+  alert("Please complete the reCAPTCHA.");
+  return;
+}
+      
+      
+      const coursee = document.getElementById("course_Sel").value.trim();
+      const group_Sel = document.getElementById("group_Sel").value.trim();
+      
+      const surname = document.getElementById("surname").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const fathername = document.getElementById("fathername").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const dob = document.getElementById("dob").value;
+
+      const mobileRegex = /^[0-9]{10}$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!mobileRegex.test(mobile)) {
+        alert("Mobile number must be exactly 10 digits.");
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      const studentData = {coursee,
+        group_Sel,
+        surname,
+        name,
+        fathername,
+        mobile,
+        email,
+        dob
+      };
+
+      // Save to localStorage
+      localStorage.setItem("studentData", JSON.stringify(studentData));
+
+      // Download as file
+      const blob = new Blob([JSON.stringify(studentData, null, 2)], { type: 'text/plain' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${surname}_${name}_data.txt`;
+      link.click();
+
+      alert("Data saved and downloaded successfully!");
+ //     this.reset();
+    });
+  </script>
+
+</body>
+</html>
