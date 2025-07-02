@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Request Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .rating-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .rating-options label {
+            font-weight: normal;
+        }
+        .required {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Give Your Query/Suggestion and Rating Here</h2>
+
+<form action="/submit" method="post">
+    
+    <label for="name">Name <span class="required">*</span></label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email address <span class="required">*</span></label>
+    <input type="email" id="email" name="email" required>
+
+    <label>Select one <span class="required">*</span></label>
+    <input type="radio" id="query" name="type" value="Query" required>
+    <label for="query">Query</label>
+    <input type="radio" id="suggestion" name="type" value="Suggestion" required>
+    <label for="suggestion">Suggestion</label>
+
+    <label for="description">Description <span class="required">*</span></label>
+    <textarea id="description" name="description" rows="5" required></textarea>
+
+    <label>Rate the site</label>
+    <div class="rating-options">
+        <span>Not of any use.</span>
+        <div>
+            <!-- Rating 0 to 10 -->
+            <select name="rating">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+        <span>Very much useful.</span>
+    </div>
+
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
